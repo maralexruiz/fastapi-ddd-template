@@ -141,22 +141,22 @@ def main():
     print("================================================")
 
     
-    # new_folder_name = NAME_LOWER_SINGULAR
-    # replacement_word = NAME_LOWER_SINGULAR
+    new_folder_name = NAME_LOWER_SINGULAR
+    replacement_word = NAME_LOWER_SINGULAR
 
-    # try:
-    #     dest_folder = copy_template_folder(new_folder_name)
-    #     rename_files_and_folders(dest_folder, replacement_word)
-    #     process_folder(
-    #         dest_folder,
-    #         NAME_CAPITALIZED_SINGULAR,
-    #         NAME_LOWER_SINGULAR,
-    #         NAME_CAPITALIZED_PLURAL,
-    #         NAME_LOWER_PLURAL
-    #     )
-    #     # print("✅ All files processed and renamed successfully.")
-    # except Exception as e:
-    #     print(f"❌ Error: {e}")
+    try:
+        dest_folder = copy_template_folder(new_folder_name)
+        rename_files_and_folders(dest_folder, replacement_word)
+        process_folder(
+            dest_folder,
+            NAME_CAPITALIZED_SINGULAR,
+            NAME_LOWER_SINGULAR,
+            NAME_CAPITALIZED_PLURAL,
+            NAME_LOWER_PLURAL
+        )
+        # print("✅ All files processed and renamed successfully.")
+    except Exception as e:
+        print(f"❌ Error: {e}")
 
  
  
