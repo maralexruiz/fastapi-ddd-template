@@ -103,25 +103,35 @@ def rename_files_and_folders(folder_path, replacement_word):
                 os.rename(old_dir_path, new_dir_path)
                 print(f"📁 Renamed folder: {old_dir_path} → {new_dir_path}")
 
+def ToCamelCase(text: str, separator: str = ' '):
+    words = text.strip().split(separator)
+    return words[0].lower() + ''.join(word.capitalize() for word in words[1:])
+
 
 def main():
     parser = argparse.ArgumentParser(description="Example script with command-line arguments.")
     
     # Define a command-line argument: --entity
     parser.add_argument('--entity', type=str, required=True, help='Entity in singular used')
+    parser.add_argument('--separator', type=str, required=False, help='Separator used for entity with several words in its name.')
 
     # Parse the arguments from the command line
     args = parser.parse_args()
 
+    separator = args.separator if args.separator else " "
+    
     entity_name = args.entity.lower()
     entity_name_plural = make_plural(entity_name)
     # Use the argument
     print(f"Creating field for {entity_name}")
 
-    NAME_CAPITALIZED_SINGULAR = entity_name.capitalize()
-    NAME_LOWER_SINGULAR = entity_name
-    NAME_CAPITALIZED_PLURAL = entity_name_plural.capitalize()
-    NAME_LOWER_PLURAL = entity_name_plural
+    entity_name_capitalized = ToCamelCase(entity_name)
+    entity_name_plural_capitalized = ToCamelCase(entity_name_plural)
+
+    NAME_CAPITALIZED_SINGULAR = entity_name_capitalized
+    NAME_LOWER_SINGULAR = entity_name.replace(" ", "_")
+    NAME_CAPITALIZED_PLURAL = entity_name_plural_capitalized
+    NAME_LOWER_PLURAL = entity_name_plural.replace(" ", "_")
     
     print("================================================")
     print(f"NAME_CAPITALIZED_SINGULAR: {NAME_CAPITALIZED_SINGULAR}")
@@ -131,22 +141,22 @@ def main():
     print("================================================")
 
     
-    new_folder_name = NAME_LOWER_SINGULAR
-    replacement_word = NAME_LOWER_SINGULAR
+    # new_folder_name = NAME_LOWER_SINGULAR
+    # replacement_word = NAME_LOWER_SINGULAR
 
-    try:
-        dest_folder = copy_template_folder(new_folder_name)
-        rename_files_and_folders(dest_folder, replacement_word)
-        process_folder(
-            dest_folder,
-            NAME_CAPITALIZED_SINGULAR,
-            NAME_LOWER_SINGULAR,
-            NAME_CAPITALIZED_PLURAL,
-            NAME_LOWER_PLURAL
-        )
-        # print("✅ All files processed and renamed successfully.")
-    except Exception as e:
-        print(f"❌ Error: {e}")
+    # try:
+    #     dest_folder = copy_template_folder(new_folder_name)
+    #     rename_files_and_folders(dest_folder, replacement_word)
+    #     process_folder(
+    #         dest_folder,
+    #         NAME_CAPITALIZED_SINGULAR,
+    #         NAME_LOWER_SINGULAR,
+    #         NAME_CAPITALIZED_PLURAL,
+    #         NAME_LOWER_PLURAL
+    #     )
+    #     # print("✅ All files processed and renamed successfully.")
+    # except Exception as e:
+    #     print(f"❌ Error: {e}")
 
  
  
