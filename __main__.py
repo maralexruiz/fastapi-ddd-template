@@ -105,7 +105,7 @@ def rename_files_and_folders(folder_path, replacement_word):
 
 def ToCamelCase(text: str, separator: str = ' '):
     words = text.strip().split(separator)
-    return words[0].lower() + ''.join(word.capitalize() for word in words[1:])
+    return ''.join(word.capitalize() for word in words)
 
 
 def main():
@@ -125,8 +125,8 @@ def main():
     # Use the argument
     print(f"Creating field for {entity_name}")
 
-    entity_name_capitalized = ToCamelCase(entity_name)
-    entity_name_plural_capitalized = ToCamelCase(entity_name_plural)
+    entity_name_capitalized = ToCamelCase(entity_name, separator)
+    entity_name_plural_capitalized = ToCamelCase(entity_name_plural, separator)
 
     NAME_CAPITALIZED_SINGULAR = entity_name_capitalized
     NAME_LOWER_SINGULAR = entity_name.replace(" ", "_")
@@ -158,7 +158,6 @@ def main():
     except Exception as e:
         print(f"❌ Error: {e}")
 
- 
  
 if __name__ == "__main__":
     main()
