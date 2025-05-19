@@ -5,11 +5,11 @@ import shutil
 
 def copy_template_folder(new_folder_name):
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    src_folder = os.path.join(script_dir, "template")
+    src_folder = os.path.join(script_dir, "org_template")
     dest_folder = os.path.join(script_dir, new_folder_name)
 
     if not os.path.exists(src_folder):
-        raise FileNotFoundError(f"'template' folder not found in {script_dir}.")
+        raise FileNotFoundError(f"'org_template' folder not found in {script_dir}.")
 
     if os.path.exists(dest_folder):
         print(f"Destination folder '{dest_folder}' already exists. Deleting it.")
@@ -19,8 +19,9 @@ def copy_template_folder(new_folder_name):
     print(f"📁 Folder copied from 'template' to '{new_folder_name}'.")
     return dest_folder
 
+
 def replace_words_in_file(
-    file_path, 
+    file_path,
     NAME_CAPITALIZED_SINGULAR,
     NAME_LOWER_SINGULAR,
     NAME_CAPITALIZED_PLURAL,
@@ -42,8 +43,9 @@ def replace_words_in_file(
     except Exception as e:
         print(f"⚠️  Skipped: {file_path} (Reason: {e})")
 
+
 def process_folder(
-    folder_path, 
+    folder_path,
     NAME_CAPITALIZED_SINGULAR,
     NAME_LOWER_SINGULAR,
     NAME_CAPITALIZED_PLURAL,
@@ -53,7 +55,7 @@ def process_folder(
         for file in files:
             if file.endswith(".pyc"):
                 continue  # Skip .pyc files
-            
+
             file_path = os.path.join(root, file)
             replace_words_in_file(
                 file_path,
@@ -62,6 +64,7 @@ def process_folder(
                 NAME_CAPITALIZED_PLURAL,
                 NAME_LOWER_PLURAL
             )
+
 
 def make_plural(word: str) -> str:
     """
@@ -77,6 +80,7 @@ def make_plural(word: str) -> str:
         return word[:-2] + 'ves'
     else:
         return word + 's'
+
 
 def rename_files_and_folders(folder_path, replacement_word):
     # Rename files and folders bottom-up to avoid path issues
@@ -103,6 +107,7 @@ def rename_files_and_folders(folder_path, replacement_word):
                 os.rename(old_dir_path, new_dir_path)
                 print(f"📁 Renamed folder: {old_dir_path} → {new_dir_path}")
 
+
 def ToCamelCase(text: str, separator: str = ' '):
     words = text.strip().split(separator)
     return ''.join(word.capitalize() for word in words)
@@ -110,7 +115,7 @@ def ToCamelCase(text: str, separator: str = ' '):
 
 def main():
     parser = argparse.ArgumentParser(description="Example script with command-line arguments.")
-    
+
     # Define a command-line argument: --entity
     parser.add_argument('--entity', type=str, required=True, help='Entity in singular used')
     parser.add_argument('--separator', type=str, required=False, help='Separator used for entity with several words in its name.')
@@ -119,7 +124,7 @@ def main():
     args = parser.parse_args()
 
     separator = args.separator if args.separator else " "
-    
+
     entity_name = args.entity.lower()
     entity_name_plural = make_plural(entity_name)
     # Use the argument
@@ -132,7 +137,7 @@ def main():
     NAME_LOWER_SINGULAR = entity_name.replace(" ", "_")
     NAME_CAPITALIZED_PLURAL = entity_name_plural_capitalized
     NAME_LOWER_PLURAL = entity_name_plural.replace(" ", "_")
-    
+
     print("================================================")
     print(f"NAME_CAPITALIZED_SINGULAR: {NAME_CAPITALIZED_SINGULAR}")
     print(f"NAME_LOWER_SINGULAR: {NAME_LOWER_SINGULAR}")
@@ -140,7 +145,6 @@ def main():
     print(f"NAME_LOWER_PLURAL: {NAME_LOWER_PLURAL}")
     print("================================================")
 
-    
     new_folder_name = NAME_LOWER_SINGULAR
     replacement_word = NAME_LOWER_SINGULAR
 
@@ -158,6 +162,6 @@ def main():
     except Exception as e:
         print(f"❌ Error: {e}")
 
- 
+
 if __name__ == "__main__":
     main()
