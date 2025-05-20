@@ -6,7 +6,7 @@ from sqlalchemy.orm.session import Session
 from app.domain.NAME_LOWER_SINGULAR import NAME_CAPITALIZED_SINGULAR, NAME_CAPITALIZED_SINGULARRepository
 from app.usecase.NAME_LOWER_SINGULAR import NAME_CAPITALIZED_SINGULARCommandUseCaseUnitOfWork
 
-from .entity_dto import NAME_CAPITALIZED_SINGULARDTO
+from .NAME_LOWER_SINGULAR_dto import NAME_CAPITALIZED_SINGULARDTO
 
 
 class NAME_CAPITALIZED_SINGULARRepositoryImpl(NAME_CAPITALIZED_SINGULARRepository):

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from template.domain.NAME_LOWER_SINGULAR import NAME_CAPITALIZED_SINGULAR
+from app.domain.NAME_LOWER_SINGULAR import NAME_CAPITALIZED_SINGULAR
 
 
 class NAME_CAPITALIZED_SINGULARRepository(ABC):

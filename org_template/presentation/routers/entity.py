@@ -7,7 +7,7 @@ from app.interface_adapters.localize import AcceptedLanguage, _
 from app.interface_adapters.security import ACLClient, AuthUser  # type: ignore
 from app.domain.NAME_LOWER_SINGULAR import NAME_CAPITALIZED_SINGULARNotFoundError
 from app.usecase.client import ClientQueryUseCase
-from app.presentation.schema.entity import ErrorMessageNAME_CAPITALIZED_SINGULARNotFound
+from app.presentation.schema.NAME_LOWER_SINGULAR import ErrorMessageNAME_CAPITALIZED_SINGULARNotFound
 from app.usecase.NAME_LOWER_SINGULAR import (
     NAME_CAPITALIZED_SINGULARReadModel,
     NAME_CAPITALIZED_SINGULARCreateModel,
